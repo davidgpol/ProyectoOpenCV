@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.proyecto</groupId>
+	<artifactId>ServidorOpenCV</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>ServidorOpenCV</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<junit.version>4.12</junit.version>
+		<spring.test>4.1.6.RELEASE</spring.test>
+		<spring.version>4.1.6.RELEASE</spring.version>
+		<javax.validation>1.1.0.Final</javax.validation>		
+		<hibernate.validation>5.1.0.Final</hibernate.validation>
+		<version.modulo.comun>1.0-SNAPSHOT</version.modulo.comun>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+		<!-- Dependencias de Spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${spring.version}</version>
+		</dependency> 
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring.version}</version>
+		</dependency>	
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.test}</version>
+		</dependency>
+		
+		<!-- Validaciones -->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>${javax.validation}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${hibernate.validation}</version>
+		</dependency>
+		<!-- Dependencia modulo comun -->
+		<dependency>
+			<groupId>com.proyecto</groupId>
+			<artifactId>comun</artifactId>
+			<version>${version.modulo.comun}</version>
+		</dependency>			
+	</dependencies>
+	<modules>
+		<module>web</module>
+		<module>modelo</module>
+	</modules>
+	<build>
+		<plugins>
+			<!-- Fuerza a poner una version concreta de JVM -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+					<configuration>
+						<source>1.8</source>
+						<target>1.8</target>
+					</configuration>
+			</plugin>		
+		</plugins>
+	</build>
+</project>

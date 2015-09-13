@@ -1,0 +1,160 @@
+html, body {
+	height: 100%;
+}
+
+.contenedorPrincipal {
+	width: 100%;
+	height: 100%;
+	margin: auto;
+	font-family: Arial;
+}
+
+.titulo {
+	height: 10%;
+	display: table;
+	width: 100%;
+	text-align: center;
+}
+
+.contenido {
+	height: 100%;
+}
+
+.menuImagenes {
+	width: 20%;
+	margin-top: 2%;
+	font-size: 1.5em;
+}
+
+.listaImagenes {
+	width: 60%;
+	height: auto;
+}
+
+.ventanaAnadirImagen {
+	width: 60%;
+	height: auto;
+	margin-top: 3.5em;
+	display: inline-block;	
+}
+
+.menuConexiones {
+	width: 20%;
+	height: auto;
+	background-color: silver;
+}
+
+.menuImagenes, .listaImagenes, .ventanaAnadirImagen, .menuConexiones {
+	float: left;
+}
+
+.barraUsuario {
+	font-size: 2.5em;
+	width: 100%;
+	display: table-cell;
+	vertical-align: middle;
+	background-color: #EDEDEE
+}
+
+.menulistaImagenes_filas {
+	background-color: #EDEDEE;
+	list-style: none;
+	padding: 0;
+	border-radius: 5px;  
+	border: 1px solid black;
+}
+
+.menuListaImagenes_columnas:hover {
+	font-weight: 700;
+	background-color: green;
+}
+
+.menuListaImagenes_columnas {
+	padding-left: 0.5em;
+	border-bottom: 1px solid black;
+}
+
+.menuListaImagenes_ultima_columna {
+  border-bottom: none;
+}
+
+.tablaImagenes {
+	width: 98%;
+	height: auto;
+	margin: 0 auto;
+	margin-top: 3.5em;	
+}
+
+.listaImagenes_filas {
+	
+	padding: 0;
+	height: 5em;
+	list-style: none;
+	text-align: center;
+	border: 1px solid black;
+}
+
+.listaImagenes_filas:hover {
+	background-color: #C0E0C0;
+}
+
+.listaImagenes_columnas {
+	width: 20%;
+	font-size:1.5em;
+	padding-left: 0.5em;
+	border-bottom: 1px solid black;
+}
+
+.listaImagenes_ultima_columna {
+  border-bottom: none;
+}
+
+.formularioAnadirImagen {
+	width: 50%;
+	font-size: 1em;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	padding: 6px 12px;	
+	margin-bottom: 0.5em;
+	box-shadow: inset 0 1px 12px rgba(0,0,0,0.075);	
+}
+
+.textoFormulario {
+	font-size: 1em;
+	font-weight: 700;
+	margin-bottom: 5px;
+	display: inline-block;
+}
+
+.botonEnviarFormulario {
+	color: black;
+	font-size: 1em;
+	padding: 6px 12px;
+	margin-top: 0.5em;
+	border-radius: 5px;
+	background-color: white;
+	border: 1px solid #ccc;
+}
+
+.botonEnviarFormulario:hover { 
+	font-weight: 700;
+	background-color: green;
+	border: 1px solid green;
+}
+
+input:focus, textarea { outline: none !important; }
+
+.errorFormulario {
+  color: red;
+  font-weight: bold;
+}
+
+.tamanoImagen {
+	width: 20%;
+}
+
+.listaImagenes_cabecera {
+	font-size: 1.8em;	
+	font-weight: bold;
+	background-color: #C0E0C0;
+}

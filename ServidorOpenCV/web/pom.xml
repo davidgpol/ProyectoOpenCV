@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.proyecto</groupId>
+		<artifactId>ServidorOpenCV</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+	<groupId>com.proyecto</groupId>
+		<artifactId>web</artifactId>
+		<version>1.0-SNAPSHOT</version>
+		<packaging>war</packaging>
+	<name>web</name>
+
+	<properties>
+		<jsp.version>2.3.1</jsp.version>
+		<jstl.version>1.2</jstl.version>	
+		<servlet.version>3.1.0</servlet.version>
+		<commons-io.version>2.4</commons-io.version>
+		<jackson-core.version>2.4.1</jackson-core.version>
+		<commons-codec.version>1.10</commons-codec.version>
+		<jackson-databind.version>2.4.1.1</jackson-databind.version>
+		<commons-fileupload.version>1.3.1</commons-fileupload.version>
+		<jackson-mapper-asl.version>1.9.13</jackson-mapper-asl.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	<dependencies>
+		<!-- Dependencias Servlets y JSP -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>${servlet.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>javax.servlet.jsp-api</artifactId>
+			<version>${jsp.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Dependencias JSTL -->
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>${jstl.version}</version>
+		</dependency>	
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>modelo</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<!-- Dependencias para subir ficheros -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>${commons-fileupload.version}</version>
+		</dependency>		 
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${commons-io.version}</version>
+		</dependency>
+		<!-- Para la salida en JSON -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>${jackson-mapper-asl.version}</version>
+		</dependency>		
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson-core.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson-databind.version}</version>
+		</dependency>
+		<!-- Codificacion base 64 -->
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>${commons-codec.version}</version>
+		</dependency>					
+	</dependencies>
+	<build>
+		<plugins>
+			<!-- Para que no de error al no tener web.xml --> 
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+		</plugins> 
+	
+		<finalName>Servidor OpenCV</finalName>
+	</build>  
+</project>
