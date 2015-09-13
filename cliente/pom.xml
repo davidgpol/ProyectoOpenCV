@@ -1,0 +1,78 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>cliente</groupId>
+  <artifactId>cliente</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  
+	<properties>
+		<spring.version>4.1.6.RELEASE</spring.version>
+		<jackson-core.version>2.4.1</jackson-core.version>
+		<version.modulo.comun>1.0-SNAPSHOT</version.modulo.comun>
+		<jackson-databind.version>2.4.1.1</jackson-databind.version>
+		<jackson-mapper-asl.version>1.9.13</jackson-mapper-asl.version>
+	</properties>
+	  
+	<dependencies>
+		<!-- Dependencias de Spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>4.1.7.RELEASE</version>
+		</dependency>
+		
+		<!-- Para la salida en JSON -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>${jackson-mapper-asl.version}</version>
+		</dependency>		
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson-core.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson-databind.version}</version>
+		</dependency>
+		<!-- Dependencia modulo comun -->
+		<dependency>
+			<groupId>com.proyecto</groupId>
+			<artifactId>comun</artifactId>
+			<version>${version.modulo.comun}</version>
+		</dependency>			
+	</dependencies>
+  
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<resources>
+			<resource>
+				<directory>src</directory>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.3</version>
+					<configuration>
+						<source>1.8</source>
+						<target>1.8</target>
+					</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
