@@ -41,9 +41,16 @@
 			<jsp:include page="consultarImagen.jsp"/>
 			<jsp:include page="anadirImagen.jsp"/>
 			<jsp:include page="eliminarImagen.jsp"/>
-			<div id = "menuConexiones" class = "menuConexiones">
-			Prueba
-			</div>
+			<nav id = "menuConexiones" class = "menuImagenes">
+					<ul class = "menulistaImagenes_filas">
+						<li class = "menuListaImagenes_columnas">
+							<a id ="cargarCache"> Cargar datos </a>
+						</li>				
+						<li class = "menuListaImagenes_columnas">
+							<a id ="eliminarCache"> Eliminar cache </a>
+						</li>
+					</ul>
+			</nav>
 		</div>
 	</div>
 </body>
