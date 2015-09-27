@@ -76,7 +76,7 @@
 		<dependency>
 			<groupId>com.proyecto</groupId>
 			<artifactId>comun</artifactId>
-			<version>${version.modulo.comun}</version>
+			<version>${version.modulo.comun}</version>			
 		</dependency>			
 	</dependencies>
 	<modules>

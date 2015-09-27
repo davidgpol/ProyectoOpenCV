@@ -20,7 +20,9 @@ import com.proyecto.modelo.configuracion.ConfiguracionHibernate;
 @Configuration
 @EnableWebMvc
 @Import(ConfiguracionHibernate.class)
-@ComponentScan(basePackages = {"com.proyecto.modelo.servicioImpl", "com.proyecto.web.controlador", "com.proyecto.web.validacion"})
+@ComponentScan(basePackages = {"com.proyecto.modelo.servicioImpl", "com.proyecto.web.controlador", 
+								"com.proyecto.web.validacion", "com.proyecto.web.opencv.service",
+								"com.proyecto.web.opencv"})
 public class ContextoConfiguracion extends WebMvcConfigurerAdapter {	
 	
 	@Bean

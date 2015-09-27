@@ -8,10 +8,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.RestTemplate;
 
 import com.proyecto.comun.constantes.ConstantesComun;
-import com.proyecto.web.configuracion.ContextoConfiguracion;
+import com.proyecto.web.configuracion.ContextoConfiguracionTest;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = ContextoConfiguracion.class)
+@ContextConfiguration(classes = ContextoConfiguracionTest.class)
 public class ControladorRestTest {
 	
 	@Autowired
