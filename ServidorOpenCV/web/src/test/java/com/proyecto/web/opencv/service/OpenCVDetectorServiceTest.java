@@ -22,18 +22,23 @@ import com.proyecto.web.utils.Constantes;
 public class OpenCVDetectorServiceTest {
 
 	@Autowired
-	OpenCVDetectorService openCVDetectorService;
+	private OpenCVDetectorService openCVDetectorService;
+	
+	@Autowired
+	private ProcesadorOpenCVService procesadorOpenCVService;
 	
 	@Test
 	public void reconocerImagen() throws IOException {
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 		
-		URL urlImagen = this.getClass().getClassLoader().getResource(Constantes.RUTA_IMAGES + "FotoCurriculum.jpg");
+		URL urlImagen = this.getClass().getClassLoader().getResource(Constantes.RUTA_IMAGES + "eva2.jpg");
 		String rutaImagen = urlImagen.getFile().substring(1);
 		Mat imagen = Highgui.imread(rutaImagen, Highgui.CV_LOAD_IMAGE_COLOR);
 		
 		// Imagen cargada
 //		Highgui.imwrite("C:\\Users\\David\\AppData\\Local\\Temp\\imagenReconocida.jpg",	 imagen);
+		
+		procesadorOpenCVService.getImagenes();
 		
 		// Imagen reconocida
 		MatrizVO matrizVO = new MatrizVO(imagen.rows(), imagen.cols(), imagen.type(), OpenCVUtils.getBytesMatriz(imagen));

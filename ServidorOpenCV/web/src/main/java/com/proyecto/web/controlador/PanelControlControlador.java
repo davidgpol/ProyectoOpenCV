@@ -1,9 +1,9 @@
 package com.proyecto.web.controlador;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import org.opencv.highgui.VideoCapture;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -11,9 +11,11 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 import com.proyecto.modelo.dto.Formulario;
 import com.proyecto.modelo.dto.ImagenDto;
 import com.proyecto.modelo.servicio.ImagenServicio;
+import com.proyecto.web.opencv.service.ProcesadorOpenCVService;
 import com.proyecto.web.utils.Constantes;
 import com.proyecto.web.utils.Constantes.Operacion;
 import com.proyecto.web.validacion.ValidarFormularioImagen;
@@ -22,7 +24,10 @@ import com.proyecto.web.validacion.ValidarFormularioImagen;
 public class PanelControlControlador {
 	
 	@Autowired
-	private ImagenServicio imagenServicio;
+	private ImagenServicio imagenServicio;	
+	
+	@Autowired
+	private ProcesadorOpenCVService procesadorOpenCVService;
 	
 	@Autowired
 	private ValidarFormularioImagen validarFormularioImagen;
@@ -93,6 +98,17 @@ public class PanelControlControlador {
 		if(0 == numeroFilas)
 			return "error";
 		
+		return "home";
+	}
+	
+	@RequestMapping(value = "cargarCache", method = RequestMethod.GET)
+	public String cargarCache(@ModelAttribute("formulario") Formulario formulario) {
+		try {
+			procesadorOpenCVService.getImagenes();
+		} catch (IOException e) {
+			// TODO Controlar excepciones controlador
+			e.printStackTrace();
+		}
 		return "home";
 	}
 	

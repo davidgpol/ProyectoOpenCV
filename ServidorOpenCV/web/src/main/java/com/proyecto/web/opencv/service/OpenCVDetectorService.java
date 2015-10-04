@@ -16,12 +16,11 @@ import com.proyecto.comun.dto.MatrizVO;
 import com.proyecto.web.utils.Constantes;
 import com.proyecto.web.utils.OpenCVUtils;
 
-
 @Service
 public class OpenCVDetectorService {
 
 	@Autowired
-	ProcesadorOpenCV procesadorOpenCV;
+	ProcesadorOpenCVService procesadorOpenCV;
 	
 	private MatOfRect detectarCaras(Mat frame, CascadeClassifier clasificador) {
 		
@@ -39,8 +38,7 @@ public class OpenCVDetectorService {
 	//TODO: HACER UN DETECTOR PARAMETRIZADO!!
 	
 	private Mat pintarCaras(Mat frame, MatOfRect matOfRect) {
-        for (Rect rect : matOfRect.toArray()) {
-        	
+        for (Rect rect : matOfRect.toArray()) {        	
             Core.rectangle(frame, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(0, 255, 0));
         }	
         return frame;
@@ -70,14 +68,13 @@ public class OpenCVDetectorService {
             // ROI de la imagen original
             Mat imageRoi = new Mat(frame, rectCrop);
             
-//            Highgui.imwrite("C:\\Users\\David\\AppData\\Local\\Temp\\imagenReconocida.jpg", image_roi);
-//            
-//            Highgui.imwrite("C:\\Users\\David\\AppData\\Local\\Temp\\imagenReconocida2.jpg", image_roi);
-            //TODO: RECONOCER LAS CARAS AQUI!!!
             // TODO: ETAPA DE PREPROCESADO!!!
             Mat copiaImageRoi = preprocesar(imageRoi);
-            procesadorOpenCV.reconocerImagen(copiaImageRoi, imageRoi);
-            Core.putText(imageRoi, "Reconocido!!", new Point(0, 50), Core.FONT_HERSHEY_SIMPLEX, 1, new Scalar(0, 255, 0), 4);
+            //TODO: RECONOCER LAS CARAS AQUI!!!
+            String nombre = procesadorOpenCV.reconocerImagen(copiaImageRoi, imageRoi);
+            if(nombre != null) {
+            	Core.putText(imageRoi, nombre, new Point(0, 50), Core.FONT_HERSHEY_SIMPLEX, 1, new Scalar(0, 255, 0), 4);
+            }
         }
         
         return frame;

@@ -1,7 +1,6 @@
 package main.java.rest;
 
 import org.opencv.core.Mat;
-import org.opencv.highgui.Highgui;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.HttpClientErrorException;

@@ -1,18 +1,18 @@
 package com.proyecto.modelo.daoImpl;
 
 import java.util.List;
-import javax.transaction.Transactional;
+
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.proyecto.modelo.dao.ImagenDao;
 import com.proyecto.modelo.entidad.Imagen;
 
-@Repository
 @Transactional
 public class ImagenDaoImpl implements ImagenDao {
 
@@ -32,7 +32,7 @@ public class ImagenDaoImpl implements ImagenDao {
 	
 	public List<Imagen> getAll() {
 		this.session = setSession();
-		Query query = session.createQuery("from Imagen");
+		Query query = session.createQuery("from Imagen").setCacheable(true);
 		List <Imagen> listaImagenes = (List <Imagen>) query.list();
 		return listaImagenes;
 	}
@@ -44,7 +44,7 @@ public class ImagenDaoImpl implements ImagenDao {
 
 	public List<Imagen> getByGrupo(Long idGrupo) {
 		this.session = setSession();
-		Criteria criteria = session.createCriteria(Imagen.class);
+		Criteria criteria = session.createCriteria(Imagen.class).setCacheable(true);
 		criteria.add(Restrictions.eq("grupoImagen", idGrupo));
 		return (List<Imagen>) criteria.list();
 	}	
@@ -52,7 +52,7 @@ public class ImagenDaoImpl implements ImagenDao {
 	@Override
 	public List<Imagen> getByNombre(String nombre) {
 		this.session = setSession();
-		Criteria criteria = session.createCriteria(Imagen.class);
+		Criteria criteria = session.createCriteria(Imagen.class).setCacheable(true);
 		criteria.add(Restrictions.ilike("nombreImagen", nombre, MatchMode.ANYWHERE));
 		return (List<Imagen>) criteria.list();
 	}

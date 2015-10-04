@@ -1,5 +1,8 @@
 package com.proyecto.web.configuracion;
 
+import static org.bytedeco.javacpp.opencv_contrib.createEigenFaceRecognizer;
+
+import org.bytedeco.javacpp.opencv_contrib.FaceRecognizer;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -56,6 +59,12 @@ public class ContextoConfiguracion extends WebMvcConfigurerAdapter {
 	    bean.setDefaultEncoding("UTF-8");
 	    return bean;
 	}
+
+	@Bean(name = "faceRecognizer")
+	public FaceRecognizer getFaceRecognizer() {
+		FaceRecognizer faceRecognizer = createEigenFaceRecognizer();
+		return faceRecognizer;
+	}	
 	
 	/*
 	@Bean(name = "usuario")	
@@ -71,4 +80,5 @@ public class ContextoConfiguracion extends WebMvcConfigurerAdapter {
 		return usuario;
 	}
 	*/
+
 }

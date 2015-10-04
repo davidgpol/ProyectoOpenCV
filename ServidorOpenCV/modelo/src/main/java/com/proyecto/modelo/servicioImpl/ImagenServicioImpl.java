@@ -89,4 +89,13 @@ public class ImagenServicioImpl implements ImagenServicio {
 		
 		return contador;
 	}
+	
+	public List<Imagen> cargarImagenes() {
+		return imagenDaoGenerico.getAll();
+	}
+	
+	public Imagen getByGrupo(long grupo) {
+		List <Imagen> lista = imagenDaoGenerico.getByGrupo(grupo);
+		return ((lista != null) && (!lista.isEmpty())) ? lista.get(0) : null;
+	}
 }

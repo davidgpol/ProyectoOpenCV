@@ -2,18 +2,22 @@ package com.proyecto.modelo.daoImplTest;
 
 import java.util.Arrays;
 import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.proyecto.modelo.configuracion.ConfiguracionHibernate;
 import com.proyecto.modelo.dao.ImagenDao;
 import com.proyecto.modelo.entidad.Imagen;
 import com.proyecto.modelo.mock.ImagenMock;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-//@TransactionConfiguration(defaultRollback = true)
+@TransactionConfiguration(defaultRollback = true)
 @ContextConfiguration(classes = ConfiguracionHibernate.class)
 public class ImagenDaoImplTest {
 	
@@ -51,41 +55,40 @@ public class ImagenDaoImplTest {
 	
 	@Test
 	// Quitar para que no haga rollback
-	//@Transactional
+	@Transactional
 	public void create() {
 		System.out.println("create:");
 		imagenDao.create(ImagenMock.getImagen());
 	}
 	
+//	@Test
+//	public void update() {
+//		System.out.println("update:");
+//		Imagen imagen = ImagenMock.getImagen();
+//		imagen.setNombreImagen("Imagen mock modificada");
+//		imagenDao.update(imagen);
+//	}	
+	
 	@Test
 	public void delete() {
 		System.out.println("delete:");
 		Imagen imagen = ImagenMock.getImagen();
-		imagen.setIdImagen(24L);
 		imagenDao.delete(imagen.getIdImagen());
 	}
-
-	@Test
-	public void update() {
-		System.out.println("update:");
-		Imagen imagen = ImagenMock.getImagen();
-		imagen.setNombreImagen("Imagen mock modificada");
-		imagenDao.update(imagen);
-	}
 	
-	@Test
-	public void deleteByGrupo() {
-		System.out.println("deleteByGrupo:");
-		Imagen imagen = ImagenMock.getImagen();
-		imagenDao.deleteByGrupo(imagen.getGrupoImagen());
-	}	
-	
-	@Test
-	public void deleteByNombre() {
-		System.out.println("deleteByNombre:");
-		Imagen imagen = ImagenMock.getImagen();
-		imagenDao.deleteByNombre(imagen.getNombreImagen());
-	}	
+//	@Test
+//	public void deleteByGrupo() {
+//		System.out.println("deleteByGrupo:");
+//		Imagen imagen = ImagenMock.getImagen();
+//		imagenDao.deleteByGrupo(imagen.getGrupoImagen());
+//	}	
+//	
+//	@Test
+//	public void deleteByNombre() {
+//		System.out.println("deleteByNombre:");
+//		Imagen imagen = ImagenMock.getImagen();
+//		imagenDao.deleteByNombre(imagen.getNombreImagen());
+//	}	
 	
 	private void printImages(List<Imagen> lista) {
 		for(int i = 0; i < lista.size(); i++)

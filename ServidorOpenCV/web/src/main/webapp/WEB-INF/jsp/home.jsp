@@ -44,7 +44,7 @@
 			<nav id = "menuConexiones" class = "menuImagenes">
 					<ul class = "menulistaImagenes_filas">
 						<li class = "menuListaImagenes_columnas">
-							<a id ="cargarCache"> Cargar datos </a>
+							<a href ="cargarCache"> Cargar datos </a>
 						</li>				
 						<li class = "menuListaImagenes_columnas">
 							<a id ="eliminarCache"> Eliminar cache </a>

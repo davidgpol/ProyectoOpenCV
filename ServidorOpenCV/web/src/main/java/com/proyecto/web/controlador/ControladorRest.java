@@ -24,7 +24,6 @@ public class ControladorRest {
 	
 	@RequestMapping(value = "/reconocerImagen",  method = RequestMethod.POST)
 	public MatrizVO postFrame(@RequestBody MatrizVO frame) {
-//		System.out.println("dentro " + frame);
 		return openCVDetectorService.reconocer(frame);
 	}	
 	

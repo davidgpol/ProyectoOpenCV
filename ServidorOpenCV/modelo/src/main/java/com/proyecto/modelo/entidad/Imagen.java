@@ -10,8 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 @Entity
 @Table(name = "imagenes")
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE, region="images")
 public class Imagen {
 
 	@Id

@@ -16,7 +16,7 @@
 	<properties>
 		<jsp.version>2.3.1</jsp.version>
 		<jstl.version>1.2</jstl.version>
-		<javacv.version>0.9</javacv.version>	
+		<javacv.version>0.11</javacv.version>	
 		<servlet.version>3.1.0</servlet.version>
 		<commons-io.version>2.4</commons-io.version>
 		<jackson-core.version>2.4.1</jackson-core.version>

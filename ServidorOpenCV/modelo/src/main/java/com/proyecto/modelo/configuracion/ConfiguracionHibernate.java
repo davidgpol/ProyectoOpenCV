@@ -18,6 +18,7 @@ import com.proyecto.modelo.daoImpl.ImagenDaoImpl;
 @EnableTransactionManagement
 @ComponentScan(basePackages = {"com.proyecto.modelo.servicioImpl"})
 public class ConfiguracionHibernate {
+	
 	@Bean(name = "dataSource")
 	public DataSource getDataSource() {
 	    BasicDataSource dataSource = new BasicDataSource();
@@ -33,7 +34,6 @@ public class ConfiguracionHibernate {
 	public SessionFactory getSessionFactory(DataSource dataSource) {
 	 
 	    LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSource);
-	    
 	    hibernateSessionParameters(sessionBuilder);
 	 
 	    return sessionBuilder.buildSessionFactory();
@@ -56,7 +56,12 @@ public class ConfiguracionHibernate {
 		sessionBuilder.setProperty("hibernate.show_sql", "true");
 		sessionBuilder.setProperty("hibernate.format_sql", "true");	
 	    sessionBuilder.setProperty("hibernate.hbm2ddl.auto", "validate");	    
-	    sessionBuilder.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");	    
+	    sessionBuilder.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
+	    // Configuracion cache nivel 2 hibernate con ehCache	    
+	    sessionBuilder.setProperty("hibernate.cache.use_second_level_cache", "true");
+	    sessionBuilder.setProperty("hibernate.cache.use_query_cache", "true");
+	    sessionBuilder.setProperty("hibernate.cache.region.factory_class", "org.hibernate.cache.ehcache.EhCacheRegionFactory");
+	    sessionBuilder.setProperty("net.sf.ehcache.configurationResourceName", "ehcache.xml");	    
 	    
 	    sessionBuilder.scanPackages("com.proyecto.modelo.entidad");		
 	}
