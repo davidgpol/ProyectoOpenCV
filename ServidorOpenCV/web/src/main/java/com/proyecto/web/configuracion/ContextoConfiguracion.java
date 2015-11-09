@@ -75,7 +75,7 @@ public class ContextoConfiguracion extends WebMvcConfigurerAdapter {
 		usuario.setApellido2("Apellido2");
 		usuario.setNick("Nick");
 		usuario.setId(1);
-		usuario.setContrasena("contrase�a");
+		usuario.setContrasena("contrasena");
 		
 		return usuario;
 	}

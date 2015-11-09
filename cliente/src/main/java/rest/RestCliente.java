@@ -8,7 +8,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.proyecto.comun.constantes.ConstantesComun;
 import com.proyecto.comun.dto.MatrizVO;
-import com.proyecto.comun.opencv.OpenCVUtils;
+import com.proyecto.comun.opencv.OpenCVComunUtils;
 
 public class RestCliente {
 	
@@ -17,20 +17,20 @@ public class RestCliente {
         return restTemplate.getForObject(ConstantesComun.SERVIDOR_URI + ConstantesComun.ESTADO_SERVIDOR, String.class);
     }
 	
-	public static Mat postProcesarFrame(Mat frame) {
+	public static MatrizVO postProcesarFrame(Mat frame) {
 		MatrizVO frameProcesado = null;
 		
         RestTemplate restTemplate = new RestTemplate();
 
         restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
         restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
-        MatrizVO matrizVO = new MatrizVO(frame.rows(), frame.cols(), frame.type(), OpenCVUtils.getBytesMatriz(frame));
+        MatrizVO matrizVO = new MatrizVO(frame.rows(), frame.cols(), frame.type(), OpenCVComunUtils.getBytesMatriz(frame), null);
 
         try {
         	frameProcesado = restTemplate.postForObject(ConstantesComun.SERVIDOR_URI + ConstantesComun.RECONOCER_IMAGEN,
         			matrizVO, MatrizVO.class);
         	
-        	return OpenCVUtils.matrizVOToMat(frameProcesado);
+        	return frameProcesado;
         }
         catch (HttpClientErrorException e) {
             System.out.println("error:  " + e.getResponseBodyAsString());
@@ -38,7 +38,7 @@ public class RestCliente {
         catch(Exception e) {
             System.out.println("Error generico");
         }        
-        return frame;
+        return null;
     }
  
 }

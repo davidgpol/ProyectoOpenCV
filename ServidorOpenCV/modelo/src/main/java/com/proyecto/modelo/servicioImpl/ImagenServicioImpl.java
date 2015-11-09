@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import org.hibernate.SessionFactory;
+import org.hibernate.stat.Statistics;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,16 +23,16 @@ import com.proyecto.modelo.utils.ImagenUtils;
 public class ImagenServicioImpl implements ImagenServicio {
 
 	@Autowired
-	ImagenDao imagenDaoGenerico;
+	ImagenDao imagenDao;
 
 	public List <ImagenDto> consultarImagenes(Formulario formulario) {
 		List <Imagen> listaImagenes;
 		List <ImagenDto> listaImagenesDto;
 		if(null != formulario.getIdImagen())			
-			listaImagenes = Arrays.asList(imagenDaoGenerico.getById(formulario.getIdImagen()));
+			listaImagenes = Arrays.asList(imagenDao.getById(formulario.getIdImagen()));
 		else if(null != formulario.getIdGrupo())
-			listaImagenes = imagenDaoGenerico.getByGrupo(formulario.getIdGrupo());
-		else listaImagenes = imagenDaoGenerico.getByNombre(formulario.getNombreImagen());
+			listaImagenes = imagenDao.getByGrupo(formulario.getIdGrupo());
+		else listaImagenes = imagenDao.getByNombre(formulario.getNombreImagen());
 		
 		ImagenDto imagenDto = null;
 		listaImagenesDto = new ArrayList<ImagenDto>();
@@ -51,10 +54,10 @@ public class ImagenServicioImpl implements ImagenServicio {
 	
 	public int eliminarImagenes(Formulario formulario) {
 		if(null != formulario.getIdImagen())
-			imagenDaoGenerico.delete(formulario.getIdImagen());
+			imagenDao.delete(formulario.getIdImagen());
 		else if(null != formulario.getIdGrupo())
-			return imagenDaoGenerico.deleteByGrupo(formulario.getIdGrupo());
-		else return imagenDaoGenerico.deleteByNombre(formulario.getNombreImagen());
+			return imagenDao.deleteByGrupo(formulario.getIdGrupo());
+		else return imagenDao.deleteByNombre(formulario.getNombreImagen());
 		
 		return 0; //TODO: QUITAR ESTE RETURN AL ARREGLAR EL DELETE BY ID
 	}
@@ -82,7 +85,7 @@ public class ImagenServicioImpl implements ImagenServicio {
 				imagen.setNombreImagen(nombreImagen);
 			} else imagen.setNombreImagen(formulario.getNombreImagen());
 											
-			imagenDaoGenerico.create(imagen);											
+			imagenDao.create(imagen);											
 			
 			contador = contador + 1;
 		}
@@ -91,11 +94,23 @@ public class ImagenServicioImpl implements ImagenServicio {
 	}
 	
 	public List<Imagen> cargarImagenes() {
-		return imagenDaoGenerico.getAll();
+		return imagenDao.getAllOrder(ImagenUtils.ORDER_BY_GRUPO_IMAGEN);
 	}
 	
 	public Imagen getByGrupo(long grupo) {
-		List <Imagen> lista = imagenDaoGenerico.getByGrupo(grupo);
+		List <Imagen> lista = imagenDao.getByGrupo(grupo);
 		return ((lista != null) && (!lista.isEmpty())) ? lista.get(0) : null;
+	}
+	
+	public boolean comprobarCache() {
+		Imagen imagen = null;
+		SessionFactory sessionFactory = imagenDao.getSessionFactory();
+		Statistics statistics = sessionFactory.getStatistics();
+		
+		imagen = imagenDao.getPimeraEntrada();
+		imagenDao.eliminarEntidadCache(imagen);
+		imagen = imagenDao.getPimeraEntrada();
+		
+		return (statistics.getSecondLevelCacheHitCount() > 0) ? true : false;
 	}
 }

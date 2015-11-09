@@ -6,6 +6,8 @@ import com.proyecto.comun.constantes.ConstantesComun;
 
 public class ImagenUtils {
 
+	public static final String ORDER_BY_GRUPO_IMAGEN = "grupoImagen";
+	
 	public static String getBase64Imagen(byte [] imagen) {
 		return Base64.encodeBase64String(imagen);		
 	}

@@ -23,20 +23,38 @@ public class ImagenDaoImpl implements ImagenDao {
 	public ImagenDaoImpl() {}
 
 	public ImagenDaoImpl(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
+		sessionFactory.getStatistics().setStatisticsEnabled(true);
+		this.sessionFactory = sessionFactory;		
 	}
 	
 	private Session setSession() {
 		return (null != this.sessionFactory) ? sessionFactory.getCurrentSession() : null; 
 	}
 	
+	public Session getSession() {
+		return session;
+	}
+	
+	@Override
+	public SessionFactory getSessionFactory() {
+		return this.sessionFactory;
+	}
+	
 	public List<Imagen> getAll() {
-		this.session = setSession();
+		this.session = setSession();		
 		Query query = session.createQuery("from Imagen").setCacheable(true);
 		List <Imagen> listaImagenes = (List <Imagen>) query.list();
 		return listaImagenes;
 	}
 
+	@Override
+	public List<Imagen> getAllOrder(String order) {
+		this.session = setSession();
+		Query query = session.createQuery("from Imagen order by " + order).setCacheable(true);
+		List <Imagen> listaImagenes = (List <Imagen>) query.list();
+		return listaImagenes;		
+	}
+	
 	public Imagen getById(Long id) {
 		this.session = setSession();
 		return (Imagen) session.get(Imagen.class, id);
@@ -59,7 +77,7 @@ public class ImagenDaoImpl implements ImagenDao {
 
 	// TODO: CAMBIAR ESTO POR MANEJAR LA EXCEPCION!!! SI TIENE EL MISMO ID GRUPO Y EL MISMO NOMBRE
 	public int create(Imagen imagen) {
-		this.session = setSession();		
+		this.session = setSession();	
 		return new Long((long) session.save(imagen)).intValue();
 	}
 
@@ -93,4 +111,19 @@ public class ImagenDaoImpl implements ImagenDao {
 		
 	}
 	
+	@Override
+	public Imagen getPimeraEntrada() {
+		this.session = setSession();
+		Criteria queryCriteria = session.createCriteria(Imagen.class).setCacheable(true);
+		queryCriteria.setFirstResult(0);
+		queryCriteria.setMaxResults(1);
+		List<Imagen> listaImagenes = queryCriteria.list();
+		return (listaImagenes != null) ? listaImagenes.get(0) : null;
+	}
+	
+	@Override
+	public void eliminarEntidadCache(Imagen imagen) {
+		this.session = setSession();
+		this.session.evict(imagen);
+	}
 }

@@ -90,6 +90,13 @@ public class ImagenDaoImplTest {
 //		imagenDao.deleteByNombre(imagen.getNombreImagen());
 //	}	
 	
+	@Test
+	public void getAllOrder() {
+		System.out.println("getAllImages by group :");
+		this.lista = imagenDao.getAllOrder("GrupoImagen");
+		printImages(lista);
+	}
+	
 	private void printImages(List<Imagen> lista) {
 		for(int i = 0; i < lista.size(); i++)
 			System.out.println(lista.get(i));

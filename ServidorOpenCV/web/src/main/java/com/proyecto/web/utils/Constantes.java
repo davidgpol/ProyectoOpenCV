@@ -9,6 +9,7 @@ public class Constantes {
 	public static final int UNO_INT					= 1;
 	public static final String RUTA_RESOURCES			= "classifiers/";
 	public static final String RUTA_IMAGES				= "images/";
+	public static final String RUTA_VIDEOS				= "videos/";
 	public static final String HAARCASCADE_FRONTALFACE	= "haarcascade_frontalface_alt.xml";
 	
 	public enum Operacion {

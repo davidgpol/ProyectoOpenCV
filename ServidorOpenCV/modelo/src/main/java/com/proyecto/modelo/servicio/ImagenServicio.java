@@ -15,4 +15,5 @@ public interface ImagenServicio {
 	public int anadirImagenes(Formulario formulario);
 	public List <Imagen> cargarImagenes();
 	public Imagen getByGrupo(long grupo);
+	public boolean comprobarCache();
 }

@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.proyecto.comun.dto.MatrizVO;
-import com.proyecto.comun.opencv.OpenCVUtils;
+import com.proyecto.comun.opencv.OpenCVComunUtils;
 import com.proyecto.modelo.entidad.Imagen;
 import com.proyecto.modelo.servicio.ImagenServicio;
 import com.proyecto.web.utils.Constantes;
@@ -48,7 +48,7 @@ public class ProcesadorOpenCVService {
 	
 	private Mat matrizVO2JavaCVMat(MatrizVO matrizVO) {
     	// Transformacion matrices OpenCV a JavaCV
-		org.opencv.core.Mat mat = OpenCVUtils.matrizVOToMat(matrizVO);		
+		org.opencv.core.Mat mat = OpenCVComunUtils.matrizVOToMat(matrizVO);		
 		return openCV2JavaCVMat(mat);
 	} 
 	
@@ -67,7 +67,7 @@ public class ProcesadorOpenCVService {
 		MatrizVO matrizVO	= null;
 
 		for(Imagen imagen: listaImagenes) {
-			matrizVO = OpenCVUtils.byteImageToMatrizVO(imagen.getImagen());
+			matrizVO = OpenCVComunUtils.byteImageToMatrizVO(imagen.getImagen());
 			listaMat.add(matrizVO2JavaCVMat(matrizVO));
 		}
 
@@ -81,23 +81,24 @@ public class ProcesadorOpenCVService {
 		
         for(int i = 0; i < tamanoMatriz; i++) {
         	images.put(i, listaMat.get(i));
-        	labelsBuf.put(i,listaImagenes.get(i).getGrupoImagen().intValue());
+        	labelsBuf.put(i, listaImagenes.get(i).getGrupoImagen().intValue());
         }		
 
-        faceRecognizer.train(images, labels);        
+        faceRecognizer.train(images, labels);
+        
         System.out.println("Imagenes cargadas y entrenadas");
 	}	
 	
-    public String reconocerImagen(org.opencv.core.Mat copiaImageRoi, org.opencv.core.Mat imageRoi ) {   	    	    	
+    public String reconocerImagen(org.opencv.core.Mat copiaImageRoi) {   	    	    	
         
-		int [] labelArray = new int[1];
+		int [] labelArray = new int[10];
 		double [] confidence = new double[1];
 		
 		Mat javaCVMat = openCV2JavaCVMat(copiaImageRoi);
         faceRecognizer.predict(javaCVMat, labelArray, confidence);
 
         System.out.println("Match found!! label: " + labelArray[0] + " confidence: " + confidence[0]);
-//        return (confidence[0] < 12000) ? getNombreCara((double) labelArray[0]) : null;
-        return getNombreCara((double) labelArray[0]);
+        return (confidence[0] < 12000) ? getNombreCara((double) labelArray[0]) : null;
+//        return getNombreCara((double) labelArray[0]);
     }
 }
