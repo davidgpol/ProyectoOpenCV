@@ -9,7 +9,7 @@ public class Cargador {
 	
 	static {	
 		logger.log(Level.INFO, "Cargando libreria OpenCV");
-		System.load("D:\\Workspaces\\git\\ProyectoOpenCV\\CargadorOpenCV\\src\\main\\resources\\opencv_java2411.dll");
+		System.load("E:\\Workspaces\\git\\ProyectoOpenCV\\CargadorOpenCV\\src\\main\\resources\\opencv_java2411.dll");
 	}
 	
 	public static void main(String[] args) {}
