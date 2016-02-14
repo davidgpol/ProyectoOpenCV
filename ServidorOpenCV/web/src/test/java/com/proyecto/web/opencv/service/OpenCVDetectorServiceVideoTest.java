@@ -32,7 +32,7 @@ import testUtils.Utils;
 @ContextConfiguration(classes = ContextoConfiguracionTest.class)
 public class OpenCVDetectorServiceVideoTest {
 
-	private static final String NOMBRE_VIDEO = "pruebaVideo.avi";
+	private static final String NOMBRE_VIDEO = "video.avi";
 	
 	@Autowired
 	private OpenCVDetectorService openCVDetectorService;

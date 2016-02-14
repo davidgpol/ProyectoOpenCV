@@ -28,14 +28,14 @@ public class OpenCVDetectorServiceTest {
 	@Autowired
 	private ProcesadorOpenCVService procesadorOpenCVService;
 	
-	private static final String NOMBRE_IMAGEN = "evaDavid.jpg";
+	private static final String NOMBRE_IMAGEN = "brangelina.jpg";
 	
 	@Test
 	public void reconocerImagen() throws IOException {
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 		
 		String rutaImagen = Utils.getRutaRecurso(Constantes.RUTA_IMAGES, NOMBRE_IMAGEN);
-		Mat imagen = Highgui.imread(rutaImagen, Highgui.CV_LOAD_IMAGE_COLOR);		
+		Mat imagen = Highgui.imread(rutaImagen, Highgui.CV_LOAD_IMAGE_COLOR);
 		
 		// Imagen cargada
 //		Highgui.imwrite("C:\\Users\\David\\AppData\\Local\\Temp\\imagenReconocida.jpg",	 imagen);

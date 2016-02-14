@@ -92,8 +92,7 @@ public class PersonaProcessor implements ItemProcessor<Persona, PersonaUrl> {
 	
 	private List<String> getUrls(String string) {
 		JSONObject json = new JSONObject(string);
-		JSONObject responseData = json.getJSONObject(Constantes.RESPONSE_DATA);
-		JSONArray results = responseData.getJSONArray(Constantes.RESULTS);
+		JSONArray results = json.getJSONArray(Constantes.RESULTS);
 		String url = null;
 		List<String> listaUrls = new ArrayList<String>();
 		

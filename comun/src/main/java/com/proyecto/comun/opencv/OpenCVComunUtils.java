@@ -5,6 +5,9 @@ import java.awt.image.DataBufferByte;
 import java.awt.image.WritableRaster;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -12,9 +15,12 @@ import javax.imageio.ImageIO;
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
+import org.opencv.core.MatOfByte;
 import org.opencv.core.Point;
 import org.opencv.core.Scalar;
+import org.opencv.highgui.Highgui;
 
+import com.proyecto.comun.constantes.ConstantesComun;
 import com.proyecto.comun.dto.Coordenada;
 import com.proyecto.comun.dto.MatrizVO;
 
@@ -61,5 +67,11 @@ public class OpenCVComunUtils {
 			}
 		}
 		return frame;
+	}
+
+	public static byte[] getBytesImagen(Mat matriz) throws IOException {
+		MatOfByte matOfByte = new MatOfByte();
+		Highgui.imencode(ConstantesComun.EXTENSION_IMAGEN, matriz, matOfByte);
+		return matOfByte.toArray();
 	}
 }

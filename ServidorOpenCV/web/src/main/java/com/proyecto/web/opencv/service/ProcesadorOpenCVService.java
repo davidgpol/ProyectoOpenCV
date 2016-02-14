@@ -98,7 +98,6 @@ public class ProcesadorOpenCVService {
         faceRecognizer.predict(javaCVMat, labelArray, confidence);
 
         System.out.println("Match found!! label: " + labelArray[0] + " confidence: " + confidence[0]);
-        return (confidence[0] < 12000) ? getNombreCara((double) labelArray[0]) : null;
-//        return getNombreCara((double) labelArray[0]);
+        return (confidence[0] < 15000) ? getNombreCara((double) labelArray[0]) : null;
     }
 }

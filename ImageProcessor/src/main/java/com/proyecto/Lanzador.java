@@ -16,9 +16,9 @@ public class Lanzador {
 	public static void main(String[] args) {
 		AnnotationConfigApplicationContext contexto = new AnnotationConfigApplicationContext(Configuracion.class);
 		JobLauncher jobLauncher = (JobLauncher)contexto	.getBean("jobLauncher");
-		Job imageDownloaderJob = (Job) contexto.getBean("imageDownloaderJob");
+		Job imageProcessorJob = (Job) contexto.getBean("imageProcessorJob");
 		try {
-			jobLauncher.run(imageDownloaderJob, new JobParameters());
+			jobLauncher.run(imageProcessorJob, new JobParameters());
 		} catch (JobExecutionAlreadyRunningException | JobRestartException | JobInstanceAlreadyCompleteException
 				| JobParametersInvalidException e) {
 			e.printStackTrace();

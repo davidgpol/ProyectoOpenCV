@@ -44,7 +44,7 @@ public class OpenCVDetectorService {
 	private Mat preprocesar(Mat imageRoi) {
 		Mat copiaImageRoi = imageRoi.clone();
 		
-		// Se redimensiona la roi de la copia para el reconocimientos
+		// Se redimensiona la roi de la copia para el reconocimiento
 		Size dimensiones = new Size(322, 393);
 		Imgproc.resize(imageRoi, copiaImageRoi, dimensiones, 0, 0, Imgproc.INTER_LINEAR);
 		

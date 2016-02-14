@@ -90,7 +90,7 @@
 			<groupId>org.bytedeco</groupId>
 			<artifactId>javacv</artifactId>
 			<version>${javacv.version}</version>
-		</dependency>
+		</dependency>				
 							
 	</dependencies>
 	<build>

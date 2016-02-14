@@ -25,8 +25,7 @@ public class VideoService {
 	private Mat histActual = new Mat();
 	private MatrizVO frameProcesado = null;
 	private boolean primerFrame = true;
-	
-	// TODO: MIRAR POR QUE NO LO HACE BIEN CON HISTOGRAMAS PASADOS POR PARAMETRO
+
 	private double compararHistogramas(boolean primerFrame, Mat frame) {
 		MatOfFloat ranges = new MatOfFloat(0f, 256f);
 		MatOfInt histSize = new MatOfInt(25);
@@ -68,12 +67,15 @@ public class VideoService {
 					resultado = compararHistogramas(false, frame);    			
     			
 	    		if(resultado < ConstantesComun.UMBRAL_RECONOCIMIENTO) {
+	    			System.out.println("Por debajo del umbral ( " + resultado + " < " + ConstantesComun.UMBRAL_RECONOCIMIENTO + " ) enviando al servidor.");
 	    			frameProcesado = RestCliente.postProcesarFrame(frame);
 	    			imagenProcesada = OpenCVUtils.mat2Image(OpenCVComunUtils.matrizVOToMat(frameProcesado));
-				} else {					
+				} 
+	    		else {
+					System.out.println("Por encima del umbral ( " + resultado + " >= " + ConstantesComun.UMBRAL_RECONOCIMIENTO + " ) realizando tracking.");
 					frame = OpenCVComunUtils.track(frameProcesado.getListaCoordenadas(), frame);
 					imagenProcesada = OpenCVUtils.mat2Image(frame);
-				}								    		
+				}							    		
     		}    			
     		
     	} catch (Exception e) {
